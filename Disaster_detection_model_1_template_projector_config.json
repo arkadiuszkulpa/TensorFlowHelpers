@@ -1,0 +1,13 @@
+{
+    "embeddings": [
+      {
+        "tensorName": "My tensor",
+        "tensorShape": [
+          1000,
+          50
+        ],
+        "tensorPath": "https://raw.githubusercontent.com/arkadiuszkulpa/TensorFlowHelpers/main/Disaster_detection_model_1_dense_vectors.tsv",
+        "metadataPath": "https://raw.githubusercontent.com/arkadiuszkulpa/TensorFlowHelpers/main/Disaster_detection_model_1_dense_metadata.tsv"
+      }
+    ]
+  }
