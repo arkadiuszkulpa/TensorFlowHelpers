@@ -7,9 +7,9 @@ import tensorflow as tf
 # Function to evaluate: accuracy, precision, recall, f1-score
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
-def load_tensorboard(dir):
-  %load_ext tensorboard
-  %tensorboard --logdir dir
+# def load_tensorboard(dir):
+#   %load_ext tensorboard
+#   %tensorboard --logdir dir
 
 def calculate_results(y_true, y_pred):
   """
