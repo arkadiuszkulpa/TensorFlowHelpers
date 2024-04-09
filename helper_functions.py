@@ -11,6 +11,37 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 #   %load_ext tensorboard
 #   %tensorboard --logdir dir
 
+def visualize_most_wrong_predictions(model, x_test, y_test):
+  """
+  Visualize most wrong predictions using a model
+  """
+  pred_probs = model.predict(x_test)
+  preds = tf.squeeze(tf.round(pred_probs))
+
+  # Create DataFrame with validation sentences, validation labels and best performing model predictions
+  val_df = pd.DataFrame({"text": x_test,
+                        "target": y_test,
+                        "pred": preds,
+                        "pred_prob": tf.squeeze(pred_probs)})
+
+  # Find the wrong predictions and sort by prediction probabilities
+  most_wrong = val_df[val_df["target"] != val_df["pred"]].sort_values("pred_prob", ascending=False)
+
+  top_10_false_positives = most_wrong[:10]
+  top_10_false_negatives = most_wrong[-10:]
+
+  for row in top_10_false_positives.itertuples():
+    _, text, target, pred, pred_prob = row
+    print(f"False Positive - Target: {target}, Pred: {pred}, Prob: {pred_prob}")
+    print(f"Text:\n{text}\n")
+    print("----\n")
+  
+  for row in top_10_false_negatives.itertuples():
+    _, text, target, pred, pred_prob = row
+    print(f"False Negative - Target: {target}, Pred: {pred}, Prob: {pred_prob}")
+    print(f"Text:\n{text}\n")
+    print("----\n")
+
 def calculate_results(y_true, y_pred):
   """
   Calcualtes model accuracy, precision, recall and f1 score of a binary classification model.
